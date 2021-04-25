@@ -75,6 +75,10 @@ class Config:
 
         config['PLUGINS'] = get_config('PLUGINS', default=[], type=list, config=config)
 
+        # housekeeping
+        config['HK_EXPIRED_DELETE_HRS'] = get_config('HK_EXPIRED_DELETE_HRS', default=None, type=int, config=config)
+        config['HK_INFO_DELETE_HRS'] = get_config('HK_INFO_DELETE_HRS', default=None, type=int, config=config)
+
         # blackout plugin
         config['BLACKOUT_DURATION'] = get_config('BLACKOUT_DURATION', default=None, type=int, config=config)
         config['NOTIFICATION_BLACKOUT'] = get_config('NOTIFICATION_BLACKOUT', default=None, type=bool, config=config)

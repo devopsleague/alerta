@@ -145,8 +145,10 @@ def health_check():
 @cross_origin()
 @permission(Scope.admin_management)
 def housekeeping():
-    expired_threshold = request.args.get('expired', default=current_app.config['DEFAULT_EXPIRED_DELETE_HRS'], type=int)
-    info_threshold = request.args.get('info', default=current_app.config['DEFAULT_INFO_DELETE_HRS'], type=int)
+    default_expired = current_app.config.get('HK_EXPIRED_DELETE_HRS', current_app.config['DEFAULT_EXPIRED_DELETE_HRS'])
+    expired_threshold = request.args.get('expired', default=default_expired, type=int)
+    default_info = current_app.config.get('HK_INFO_DELETE_HRS', current_app.config['DEFAULT_INFO_DELETE_HRS'])
+    info_threshold = request.args.get('info', default=default_info, type=int)
 
     has_expired, shelve_timeout, ack_timeout = Alert.housekeeping(expired_threshold, info_threshold)
 
